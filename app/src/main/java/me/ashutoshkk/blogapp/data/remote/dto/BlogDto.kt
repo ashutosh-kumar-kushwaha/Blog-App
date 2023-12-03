@@ -1,5 +1,6 @@
 package me.ashutoshkk.blogapp.data.remote.dto
 
+import android.text.Html
 import com.google.gson.annotations.SerializedName
 import me.ashutoshkk.blogapp.domain.model.Blog
 
@@ -39,7 +40,7 @@ data class BlogDto(
 
 fun me.ashutoshkk.blogapp.data.remote.dto.BlogDto.toBlog() = Blog(
     id = id,
-    title = title.rendered,
+    title = Html.fromHtml(title.rendered, Html.FROM_HTML_MODE_COMPACT).toString(),
     imageUrl = jetpack_featured_media_url,
     url = link,
     date = date
