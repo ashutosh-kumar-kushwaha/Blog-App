@@ -1,6 +1,7 @@
 package me.ashutoshkk.blogapp.data.dto
 
 import com.google.gson.annotations.SerializedName
+import me.ashutoshkk.blogapp.domain.model.Blog
 
 data class BlogDto(
     val _links: Links,
@@ -34,4 +35,12 @@ data class BlogDto(
     val template: String,
     val title: Title,
     val type: String
+)
+
+fun BlogDto.toBlog() = Blog(
+    id = id,
+    title = title.rendered,
+    imageUrl = jetpack_featured_media_url,
+    url = link,
+    date = date
 )
