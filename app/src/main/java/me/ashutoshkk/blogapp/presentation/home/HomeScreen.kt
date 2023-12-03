@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.paging.compose.collectAsLazyPagingItems
 import me.ashutoshkk.blogapp.presentation.home.components.BlogItem
 import me.ashutoshkk.blogapp.presentation.viewModels.HomeViewModel
 
@@ -20,7 +20,7 @@ fun HomeScreen(
     viewModel: HomeViewModel = hiltViewModel(),
     onItemClick: (String) -> Unit = {}
 ) {
-    val blogs = viewModel.blogs.collectAsStateWithLifecycle()
+    val blogs = viewModel.blogs.collectAsLazyPagingItems()
 
     LazyColumn(
         modifier = Modifier
@@ -30,9 +30,9 @@ fun HomeScreen(
         contentPadding = PaddingValues(vertical = 24.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        items(blogs.value.size) {
+        items(blogs.itemCount) {
             BlogItem(
-                blogs.value[it]
+                blogs[it]!!
             ) { url ->
                 onItemClick(url)
             }

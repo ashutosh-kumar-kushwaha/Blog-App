@@ -1,7 +1,10 @@
 package me.ashutoshkk.blogapp.domain.repository
 
-import me.ashutoshkk.blogapp.data.remote.dto.BlogDto
+import androidx.paging.Pager
+import androidx.paging.PagingData
+import kotlinx.coroutines.flow.Flow
+import me.ashutoshkk.blogapp.domain.model.Blog
 
 interface BlogRepository {
-    suspend fun getBlogs(): List<BlogDto>
+    suspend fun getBlogs(): Flow<PagingData<Blog>>
 }

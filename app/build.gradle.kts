@@ -86,4 +86,8 @@ dependencies {
 
     implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.2")
+
+    val paging_version = "3.2.1"
+    implementation("androidx.paging:paging-runtime-ktx:$paging_version")
+    implementation("androidx.paging:paging-compose:3.2.1")
 }
