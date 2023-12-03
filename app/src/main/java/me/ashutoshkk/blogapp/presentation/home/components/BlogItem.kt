@@ -4,12 +4,12 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -27,7 +27,7 @@ import me.ashutoshkk.blogapp.ui.theme.Poppins
 fun BlogItem() {
     val blog = Blog(
         title = "This is a blog title",
-        imageUrl = "https://images.unsplash.com/photo-1634179617417-8b9b8b5b9b0f?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzNnx8fGVufDB8fHx8&ixlib=rb-1.2.1&w=1000&q=80",
+        imageUrl = "https://upload.wikimedia.org/wikipedia/commons/d/d7/Android_robot.svg",
         url = "https://google.com",
         date = "2 days ago",
         id = 0
@@ -36,22 +36,23 @@ fun BlogItem() {
         modifier = Modifier
             .fillMaxWidth()
     ) {
-        val (image, title, date) = createRefs()
+        val (image, column) = createRefs()
 
         GlideImage(
             model = blog.imageUrl,
             contentDescription = stringResource(id = R.string.thumbnail),
+            contentScale = ContentScale.FillWidth,
             modifier = Modifier
                 .fillMaxWidth(0.4f)
                 .aspectRatio((4 / 3).toFloat())
                 .constrainAs(image) {
                     top.linkTo(parent.top)
                     start.linkTo(parent.start)
-                }
+                },
         )
         Column(
             modifier = Modifier
-                .constrainAs(title) {
+                .constrainAs(column) {
                     top.linkTo(image.top)
                     start.linkTo(image.end)
                     end.linkTo(parent.end)
@@ -65,14 +66,16 @@ fun BlogItem() {
                 overflow = TextOverflow.Ellipsis,
                 fontFamily = Poppins,
                 fontWeight = FontWeight(600),
-                fontSize = 20.sp
+                fontSize = 20.sp,
+                color = Color.Black
             )
             Text(
                 text = blog.date,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
                 fontFamily = Poppins,
-                fontSize = 12.sp
+                fontSize = 12.sp,
+                color = Color.Black
             )
         }
     }
