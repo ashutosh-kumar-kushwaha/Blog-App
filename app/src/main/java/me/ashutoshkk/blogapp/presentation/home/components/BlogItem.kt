@@ -1,11 +1,14 @@
 package me.ashutoshkk.blogapp.presentation.home.components
 
+import android.icu.text.SimpleDateFormat
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -22,6 +25,8 @@ import com.bumptech.glide.integration.compose.GlideImage
 import me.ashutoshkk.blogapp.R
 import me.ashutoshkk.blogapp.domain.model.Blog
 import me.ashutoshkk.blogapp.ui.theme.Poppins
+import java.text.ParseException
+import java.util.Locale
 
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
@@ -53,8 +58,8 @@ fun BlogItem(blog: Blog) {
                     bottom.linkTo(image.bottom)
                     width = Dimension.fillToConstraints
                     height = Dimension.fillToConstraints
-                },
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+                }
+                .padding(8.dp)
         ) {
             Text(
                 text = blog.title,
