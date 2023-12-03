@@ -1,4 +1,4 @@
-package me.ashutoshkk.blogapp.data.dto
+package me.ashutoshkk.blogapp.data.remote.dto
 
 data class Author(
     val embeddable: Boolean,

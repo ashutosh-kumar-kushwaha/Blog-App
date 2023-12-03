@@ -16,6 +16,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.constraintlayout.compose.Dimension
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import me.ashutoshkk.blogapp.R
@@ -24,14 +25,7 @@ import me.ashutoshkk.blogapp.ui.theme.Poppins
 
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
-fun BlogItem() {
-    val blog = Blog(
-        title = "This is a blog title",
-        imageUrl = "https://upload.wikimedia.org/wikipedia/commons/d/d7/Android_robot.svg",
-        url = "https://google.com",
-        date = "2 days ago",
-        id = 0
-    )
+fun BlogItem(blog: Blog) {
     ConstraintLayout(
         modifier = Modifier
             .fillMaxWidth()
@@ -41,10 +35,10 @@ fun BlogItem() {
         GlideImage(
             model = blog.imageUrl,
             contentDescription = stringResource(id = R.string.thumbnail),
-            contentScale = ContentScale.FillWidth,
+            contentScale = ContentScale.Crop,
             modifier = Modifier
                 .fillMaxWidth(0.4f)
-                .aspectRatio((4 / 3).toFloat())
+                .aspectRatio(16.toFloat() / 9)
                 .constrainAs(image) {
                     top.linkTo(parent.top)
                     start.linkTo(parent.start)
@@ -57,16 +51,18 @@ fun BlogItem() {
                     start.linkTo(image.end)
                     end.linkTo(parent.end)
                     bottom.linkTo(image.bottom)
+                    width = Dimension.fillToConstraints
+                    height = Dimension.fillToConstraints
                 },
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+            verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             Text(
                 text = blog.title,
-                maxLines = 3,
+                maxLines = 2,
                 overflow = TextOverflow.Ellipsis,
                 fontFamily = Poppins,
                 fontWeight = FontWeight(600),
-                fontSize = 20.sp,
+                fontSize = 16.sp,
                 color = Color.Black
             )
             Text(
@@ -81,8 +77,16 @@ fun BlogItem() {
     }
 }
 
-@Preview
+@Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun PreviewBlogItem() {
-    BlogItem()
+    BlogItem(
+        Blog(
+        id = 1,
+        title = "Title",
+        imageUrl = "https://images.unsplash.com/photo-1632836926809-4b9b9b5b9b0f?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzNnx8fGVufDB8fHx8&ixlib=rb-1.2.1",
+        url = "https://google.com",
+        date = "2021-09-28T12:00:00"
+    )
+    )
 }

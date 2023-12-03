@@ -1,4 +1,4 @@
-package me.ashutoshkk.blogapp.data.dto
+package me.ashutoshkk.blogapp.data.remote.dto
 
 data class Meta(
     val _jetpack_newsletter_access: String,
@@ -8,6 +8,6 @@ data class Meta(
     val jetpack_post_was_ever_published: Boolean,
     val jetpack_publicize_feature_enabled: Boolean,
     val jetpack_publicize_message: String,
-    val jetpack_social_options: JetpackSocialOptions,
+    val jetpack_social_options: me.ashutoshkk.blogapp.data.remote.dto.JetpackSocialOptions,
     val jetpack_social_post_already_shared: Boolean
 )

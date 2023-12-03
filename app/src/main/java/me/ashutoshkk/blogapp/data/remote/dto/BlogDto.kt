@@ -1,30 +1,30 @@
-package me.ashutoshkk.blogapp.data.dto
+package me.ashutoshkk.blogapp.data.remote.dto
 
 import com.google.gson.annotations.SerializedName
 import me.ashutoshkk.blogapp.domain.model.Blog
 
 data class BlogDto(
-    val _links: Links,
+    val _links: me.ashutoshkk.blogapp.data.remote.dto.Links,
     val aioseo_notices: List<Any>,
     val author: Int,
     val categories: List<Int>,
     val comment_status: String,
-    val content: Content,
+    val content: me.ashutoshkk.blogapp.data.remote.dto.Content,
     val date: String,
     val date_gmt: String,
-    val excerpt: Excerpt,
+    val excerpt: me.ashutoshkk.blogapp.data.remote.dto.Excerpt,
     val featured_media: Int,
     val format: String,
-    val guid: Guid,
+    val guid: me.ashutoshkk.blogapp.data.remote.dto.Guid,
     val id: Int,
-    @SerializedName("jetpack-related-posts") val jetpackRelatedPosts: List<JetpackRelatedPost>,
+    @SerializedName("jetpack-related-posts") val jetpackRelatedPosts: List<me.ashutoshkk.blogapp.data.remote.dto.JetpackRelatedPost>,
     val jetpack_featured_media_url: String,
     val jetpack_likes_enabled: Boolean,
     val jetpack_publicize_connections: List<Any>,
     val jetpack_sharing_enabled: Boolean,
     val jetpack_shortlink: String,
     val link: String,
-    val meta: Meta,
+    val meta: me.ashutoshkk.blogapp.data.remote.dto.Meta,
     val modified: String,
     val modified_gmt: String,
     val ping_status: String,
@@ -33,11 +33,11 @@ data class BlogDto(
     val sticky: Boolean,
     val tags: List<Int>,
     val template: String,
-    val title: Title,
+    val title: me.ashutoshkk.blogapp.data.remote.dto.Title,
     val type: String
 )
 
-fun BlogDto.toBlog() = Blog(
+fun me.ashutoshkk.blogapp.data.remote.dto.BlogDto.toBlog() = Blog(
     id = id,
     title = title.rendered,
     imageUrl = jetpack_featured_media_url,
