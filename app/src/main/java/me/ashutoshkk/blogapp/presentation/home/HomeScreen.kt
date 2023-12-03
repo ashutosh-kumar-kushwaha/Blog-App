@@ -17,7 +17,8 @@ import me.ashutoshkk.blogapp.presentation.viewModels.HomeViewModel
 
 @Composable
 fun HomeScreen(
-    viewModel: HomeViewModel = hiltViewModel()
+    viewModel: HomeViewModel = hiltViewModel(),
+    onItemClick: (String) -> Unit = {}
 ) {
     val blogs = viewModel.blogs.collectAsStateWithLifecycle()
 
@@ -28,9 +29,13 @@ fun HomeScreen(
             .padding(horizontal = 24.dp),
         contentPadding = PaddingValues(vertical = 24.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
-    ){
-        items(blogs.value.size){
-            BlogItem(blogs.value[it])
+    ) {
+        items(blogs.value.size) {
+            BlogItem(
+                blogs.value[it]
+            ) { url ->
+                onItemClick(url)
+            }
         }
     }
 }

@@ -1,4 +1,4 @@
-package me.ashutoshkk.blogapp.ui.theme
+package me.ashutoshkk.blogapp.presentation.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

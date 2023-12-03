@@ -1,14 +1,13 @@
 package me.ashutoshkk.blogapp.presentation.home.components
 
-import android.icu.text.SimpleDateFormat
-import androidx.compose.foundation.layout.Arrangement
+import android.net.Uri
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -24,16 +23,20 @@ import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import me.ashutoshkk.blogapp.R
 import me.ashutoshkk.blogapp.domain.model.Blog
-import me.ashutoshkk.blogapp.ui.theme.Poppins
-import java.text.ParseException
-import java.util.Locale
+import me.ashutoshkk.blogapp.presentation.ui.theme.Poppins
 
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
-fun BlogItem(blog: Blog) {
+fun BlogItem(
+    blog: Blog,
+    onItemClick: (String) -> Unit = {}
+) {
     ConstraintLayout(
         modifier = Modifier
             .fillMaxWidth()
+            .clickable {
+                onItemClick(Uri.encode(blog.url))
+            }
     ) {
         val (image, column) = createRefs()
 
@@ -68,7 +71,8 @@ fun BlogItem(blog: Blog) {
                 fontFamily = Poppins,
                 fontWeight = FontWeight(600),
                 fontSize = 16.sp,
-                color = Color.Black
+                color = Color.Black,
+                lineHeight = 24.sp
             )
             Text(
                 text = blog.date,
@@ -87,11 +91,11 @@ fun BlogItem(blog: Blog) {
 fun PreviewBlogItem() {
     BlogItem(
         Blog(
-        id = 1,
-        title = "Title",
-        imageUrl = "https://images.unsplash.com/photo-1632836926809-4b9b9b5b9b0f?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzNnx8fGVufDB8fHx8&ixlib=rb-1.2.1",
-        url = "https://google.com",
-        date = "2021-09-28T12:00:00"
-    )
+            id = 1,
+            title = "Title",
+            imageUrl = "https://images.unsplash.com/photo-1632836926809-4b9b9b5b9b0f?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzNnx8fGVufDB8fHx8&ixlib=rb-1.2.1",
+            url = "https://google.com",
+            date = "2021-09-28T12:00:00"
+        )
     )
 }
