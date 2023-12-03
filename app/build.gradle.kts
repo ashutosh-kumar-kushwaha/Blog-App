@@ -1,6 +1,8 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("com.google.dagger.hilt.android")
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -79,5 +81,6 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout-compose:1.0.1")
     implementation("androidx.compose.ui:ui-text-google-fonts:1.5.4")
 
-
+    implementation("com.google.dagger:hilt-android:2.49")
+    ksp("com.google.dagger:hilt-compiler:2.49")
 }
