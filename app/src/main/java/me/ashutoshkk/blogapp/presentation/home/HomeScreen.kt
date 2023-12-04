@@ -8,11 +8,13 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
@@ -41,7 +43,7 @@ fun HomeScreen(
                 onItemClick(url)
             }
         }
-        when (blogs.loadState.refresh) {
+        when (val state = blogs.loadState.refresh) {
             is LoadState.Loading -> {
                 item {
                     Column(
@@ -55,13 +57,27 @@ fun HomeScreen(
             }
 
             is LoadState.Error -> {
-
+                item {
+                    Column(
+                        modifier = Modifier.fillParentMaxSize(),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.Center
+                    ) {
+                        state.error.localizedMessage?.let {
+                            Text(
+                                text = it,
+                                color = Color.Black,
+                                fontSize = 16.sp,
+                            )
+                        }
+                    }
+                }
             }
 
             else -> {}
         }
 
-        when (blogs.loadState.append) {
+        when (val state = blogs.loadState.append) {
             is LoadState.Loading -> {
                 item {
                     Column(
@@ -76,7 +92,21 @@ fun HomeScreen(
             }
 
             is LoadState.Error -> {
-
+                item {
+                    Column(
+                        modifier = Modifier.fillParentMaxSize(),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.Center
+                    ) {
+                        state.error.localizedMessage?.let {
+                            Text(
+                                text = it,
+                                color = Color.Black,
+                                fontSize = 16.sp,
+                            )
+                        }
+                    }
+                }
             }
 
             else -> {}
