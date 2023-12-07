@@ -19,8 +19,11 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -51,8 +54,8 @@ fun HomeScreen(
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
     val connectivityObserver =
         NetworkConnectivityObserver(LocalContext.current)
-    var showConnectedSnackbar = remember {
-        false
+    var showConnectedSnackbar by remember {
+        mutableStateOf(false)
     }
 
     val connectivityStatus = connectivityObserver.observe()
@@ -99,8 +102,6 @@ fun HomeScreen(
             }
 
             ConnectivityObserver.Status.Losing -> {
-                showConnectedSnackbar = true
-
                 snackbarHostState.showSnackbar(
                     message = "Internet Losing",
                     duration = SnackbarDuration.Short
@@ -109,7 +110,6 @@ fun HomeScreen(
 
             ConnectivityObserver.Status.Lost -> {
                 showConnectedSnackbar = true
-
                 snackbarHostState.showSnackbar(
                     message = "Internet Lost",
                     duration = SnackbarDuration.Indefinite
@@ -117,8 +117,6 @@ fun HomeScreen(
             }
 
             ConnectivityObserver.Status.Unavailable -> {
-                showConnectedSnackbar = true
-
                 snackbarHostState.showSnackbar(
                     message = "Internet Unavailable",
                     duration = SnackbarDuration.Indefinite
